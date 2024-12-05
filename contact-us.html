@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Bean Boutique</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/social-media.css" class="">
+    <link rel="stylesheet" href="css/map.css">
+</head>
+<body class="background">
+    <nav class="navbar bg-dark">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <!-- Centered Title -->
+            <p class="h1 text-light mx-auto">Bean Boutique</p>
+    
+            <!-- Shopping Cart Button (Right-aligned) -->
+            <button id="cartButton" type="button" class="btn btn-primary position-relative ms-auto me-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+                <i class="fas fa-shopping-cart"></i> <!-- Shopping Cart Icon -->
+                Shopping Cart
+                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    0
+                    <span class="visually-hidden">items in cart</span>
+                </span>
+            </button>
+    
+            <!-- Button to toggle Offcanvas on small screens -->
+            <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav">
+                Menu
+            </button>
+        </div>
+    </nav>
+
+    <!-- Navbar for larger screens -->
+    <ul class="nav nav-tabs bg-dark d-none d-lg-flex" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="index.html" role="tab" aria-selected="false">Home</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="brewing-equipment.html" role="tab" aria-selected="false">Brewing Equipment</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="special-offers.html" role="tab" aria-selected="false">Special Offers</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active background" href="contact-us.html" role="tab" aria-selected="true">Contact Us</a>
+        </li>
+    </ul>
+
+    <!-- Offcanvas for smaller screens -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav nav-tabs flex-column" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="index.html" role="tab" aria-selected="false">Home</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="brewing-equipment.html" role="tab" aria-selected="false">Brewing Equipment</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="special-offers.html" role="tab" aria-selected="false">Special Offers</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active background" href="contact-us.html" role="tab" aria-selected="true">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items" class="p-4 bg-light rounded">
+                        <!-- Items will be dynamically added here by JavaScript -->
+                    </div>
+                    <div id="cart-total" class="d-flex justify-content-between align-items-center mt-4 p-3">
+                        <p class="mb-0">Total: $<span id="total-price">0.00</span></p>
+                        <button id="checkout-btn" class="btn btn-dark">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container contact-page my-5">
+        <h2 class="text-center mb-3">Contact Us</h2>
+        <p class="text-center mb-4">We would love to hear from you! Fill out the form below with your inquiries, feedback, or comments.</p>
+        
+        <form id="contact-form" class="mb-4">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <input type="text" class="form-control" id="subject" name="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-dark btn-block">Send Message</button>
+        </form>
+    
+        <!-- Find Us Here Section -->
+        <section class="find-us p-4 bg-light rounded">
+            <h3 class="text-center mb-3">Find Us Here</h3>
+            <div class="location-details text-center mb-3">
+                <p><strong>Address:</strong> Coffee Lane, Beanville, USA</p>
+                <p><strong>Phone:</strong> +95 996 542 3658</p>
+                <p><strong>Email:</strong> support@beanboutique.com</p>
+            </div>
+            <!-- Embedded Google Map -->
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835648278357!2d-122.406417284681!3d37.78583497975698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085818b45af0b29%3A0x917d7e1ed5c96c10!2sCoffee%20Shop!5e0!3m2!1sen!2sus!4v1594170210263!5m2!1sen!2sus">
+                </iframe>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <p>&copy; 2024 Bean Boutique | Follow us on Social Media</p>
+        <div class="d-flex justify-content-center">
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="text-white mx-2">
+                <i class="fab fa-facebook-f fa-2x"></i>
+            </a>
+            <a href="https://twitter.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-twitter fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://www.youtube.com/c/yourchannel" target="_blank" class="text-white mx-2">
+                <i class="fab fa-youtube fa-2x"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>
