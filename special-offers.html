@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Offers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/social-media.css">
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body class="background">
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <p class="h1 text-light">Bean Boutique</p>
+            <form class="d-flex search-form" role="search">
+                <input id="searchInput" class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success search-icon" type="button" onclick="toggleSearch()">🔍 Search</button>
+            </form>
+  
+            <!-- Shopping Cart Button -->
+            <button id="cartButton" type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+                <i class="fas fa-shopping-cart"></i> <!-- Shopping Cart Icon -->
+                Shopping Cart
+                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    0
+                    <span class="visually-hidden">items in cart</span>
+                </span>
+            </button>
+
+            <!-- Button to toggle Offcanvas on small screens -->
+            <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav">
+                Menu
+            </button>
+        </div>
+    </nav>
+
+    <!-- Navbar for larger screens -->
+    <ul class="nav nav-tabs bg-dark d-none d-lg-flex" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="index.html" role="tab" aria-selected="false">Home</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="brewing-equipment.html" role="tab" aria-selected="false">Brewing Equipment</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active background" href="special-offers.html" role="tab" aria-selected="true">Special Offers</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="contact-us.html" role="tab" aria-selected="false">Contact Us</a>
+        </li>
+    </ul>
+
+    <!-- Offcanvas for smaller screens -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav nav-tabs flex-column" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="index.html" role="tab" aria-selected="false">Home</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="brewing-equipment.html" role="tab" aria-selected="false">Brewing Equipment</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active background" href="special-offers.html" role="tab" aria-selected="true">Special Offers</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="contact-us.html" role="tab" aria-selected="false">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items" class="p-4 bg-light rounded">
+                        <!-- Items will be dynamically added here by JavaScript -->
+                    </div>
+                    <div id="cart-total" class="d-flex justify-content-between align-items-center mt-4 p-3">
+                        <p class="mb-0">Total: $<span id="total-price">0.00</span></p>
+                        <button id="checkout-btn" class="btn btn-dark">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container special-offers-page py-4">
+        <section class="offers-list">
+            <h2 class="text-center mb-4">Current Special Offers</h2>
+    
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">10% Off All Coffee Beans</h3>
+                    <p class="card-text">Valid until: October 31, 2024</p>
+                    <p class="card-text">Enjoy a 10% discount on all our freshly roasted coffee beans!</p>
+                </div>
+            </div>
+    
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Buy One Get One Free on French Press</h3>
+                    <p class="card-text">Valid until: November 15, 2024</p>
+                    <p class="card-text">Buy one French Press and get another one absolutely free!</p>
+                </div>
+            </div>
+    
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">Free Shipping on Orders Over $50</h3>
+                    <p class="card-text">Valid until: December 1, 2024</p>
+                    <p class="card-text">Get free shipping on any order over $50, perfect for stocking up on coffee essentials.</p>
+                </div>
+            </div>
+        </section>
+    
+        <section class="subscription-form">
+            <h2 class="text-center mb-5">Subscribe for Special Offers</h2>
+            <form id="subscription-form" class="mx-auto" style="max-width: 400px;">
+                <div class="form-group mb-3">
+                    <label for="name">Full Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+    
+                <div class="form-group mb-3">
+                    <label for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+    
+                <button type="submit" class="btn btn-dark w-100">Subscribe</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer class="bg-dark text-white text-center py-4">
+        <p>&copy; 2024 Bean Boutique | Follow us on Social Media</p>
+        <div class="d-flex justify-content-center">
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="text-white mx-2">
+                <i class="fab fa-facebook-f fa-2x"></i>
+            </a>
+            <a href="https://twitter.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-twitter fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://www.youtube.com/c/yourchannel" target="_blank" class="text-white mx-2">
+                <i class="fab fa-youtube fa-2x"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("subscription-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            alert("Thank you for subscribing to Bean Boutique's special offers!");
+            document.getElementById("subscription-form").reset();
+        });
+        
+    </script>
+
+    <script src="js/cart.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
