@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brewing Equipment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/social-media.css">
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/search.css">
+</head>
+<body class="background">
+    <nav class="navbar bg-dark">
+        <div class="container-fluid">
+            <p class="h1 text-light">Bean Boutique</p>
+            <form class="d-flex search-form" role="search">
+                <input id="searchInput" class="form-control search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success search-icon" type="button" onclick="toggleSearch()">🔍 Search</button>
+            </form>
+  
+            <!-- Shopping Cart Button -->
+            <button id="cartButton" type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#cartModal">
+                <i class="fas fa-shopping-cart"></i> <!-- Shopping Cart Icon -->
+                Shopping Cart
+                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    0
+                    <span class="visually-hidden">items in cart</span>
+                </span>
+            </button>
+
+            <!-- Button to toggle Offcanvas on small screens -->
+            <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav">
+                Menu
+            </button>
+        </div>
+    </nav>
+
+    <!-- Navbar for larger screens -->
+    <ul class="nav nav-tabs bg-dark d-none d-lg-flex" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link text-warning" href="index.html" role="tab" aria-selected="false">Home</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active background" href="brewing-equipment.html" role="tab" aria-selected="true">Brewing Equipment</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link text-warning" href="special-offers.html" role="tab" aria-selected="false">Special Offers</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link text-warning" href="contact-us.html" role="tab" aria-selected="false">Contact Us</a>
+        </li>
+    </ul>
+
+    <!-- Offcanvas for smaller screens -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav nav-tabs flex-column" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="index.html" role="tab" aria-selected="false">Home</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active background" href="brewing-equipment.html" role="tab" aria-selected="true">Brewing Equipment</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="special-offers.html" role="tab" aria-selected="false">Special Offers</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="contact-us.html" role="tab" aria-selected="false">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items" class="p-4 bg-light rounded">
+                        <!-- Items will be dynamically added here by JavaScript -->
+                    </div>
+                    <div id="cart-total" class="d-flex justify-content-between align-items-center mt-4 p-3">
+                        <p class="mb-0">Total: $<span id="total-price">0.00</span></p>
+                        <button id="checkout-btn" class="btn btn-dark">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="equipment-page container py-4">
+        <h2 class="text-center mb-4">Brewing Equipment</h2>
+        <div class="row">
+            <!-- Equipment Item 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="img/french-press.jpg" class="card-img-top" alt="French Press">
+                    <div class="card-body">
+                        <h3 class="card-title">French Press</h3>
+                        <p class="card-text">Enjoy a full-bodied coffee with this classic French press. Made with durable glass and stainless steel.</p>
+                        <p class="text-muted">Price: $35.00</p>
+
+                        <!-- Quantity Selector -->
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('frenchpressQty', -1)">-</button>
+                            <input type="text" id="frenchpressQty" value="1" class="text-center mx-2" style="width: 50px;" readonly>
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('frenchpressQty', 1)">+</button>
+                        </div>
+
+                        <button class="btn btn-dark" onclick="addToCart('French Press', 35.00, parseInt(document.getElementById('frenchpressQty').value))">Add to Cart</button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#frenchPressModal">Details</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Equipment Item 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="img/espresso-machine.webp" class="card-img-top" alt="Espresso Machine">
+                    <div class="card-body">
+                        <h3 class="card-title">Espresso Machine</h3>
+                        <p class="card-text">Professional-grade espresso machine for rich, flavorful coffee shots at home.</p>
+                        <p class="text-muted">Price: $499.00</p>
+
+                        <!-- Quantity Selector -->
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('espressomachineQty', -1)">-</button>
+                            <input type="text" id="espressomachineQty" value="1" class="text-center mx-2" style="width: 50px;" readonly>
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('espressomachineQty', 1)">+</button>
+                        </div>
+
+                        <button class="btn btn-dark" onclick="addToCart('Espresso Machine', 499.00, parseInt(document.getElementById('espressomachineQty').value))">Add to Cart</button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#espressoMachineModal">Details</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Equipment Item 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="img/pour-over.webp" class="card-img-top" alt="Pour Over">
+                    <div class="card-body">
+                        <h3 class="card-title">Pour Over</h3>
+                        <p class="card-text">A minimalist pour-over set that offers a perfect brew every time.</p>
+                        <p class="text-muted">Price: $25.00</p>
+
+                        <!-- Quantity Selector -->
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('pouroverQty', -1)">-</button>
+                            <input type="text" id="pouroverQty" value="1" class="text-center mx-2" style="width: 50px;" readonly>
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('pouroverQty', 1)">+</button>
+                        </div>
+
+                        <button class="btn btn-dark" onclick="addToCart('Pour Over', 25.00, parseInt(document.getElementById('pouroverQty').value))">Add to Cart</button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#pourOverModal">Details</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Equipment Item 4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="img/coffee-grinder.jpg" class="card-img-top" alt="Coffee Grinder">
+                    <div class="card-body">
+                        <h3 class="card-title">Coffee Grinder</h3>
+                        <p class="card-text">Adjustable ceramic grinder to achieve your perfect coffee grind.</p>
+                        <p class="text-muted">Price: $40.00</p>
+
+                        <!-- Quantity Selector -->
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('coffeegrinderQty', -1)">-</button>
+                            <input type="text" id="coffeegrinderQty" value="1" class="text-center mx-2" style="width: 50px;" readonly>
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('coffeegrinderQty', 1)">+</button>
+                        </div>
+
+                        <button class="btn btn-dark" onclick="addToCart('Coffee Grinder', 40.00, parseInt(document.getElementById('coffeegrinderQty').value))">Add to Cart</button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#coffeeGrinderModal">Details</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Equipment Item 5 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 text-center">
+                    <img src="img/aeropress.webp" class="card-img-top" alt="AeroPress">
+                    <div class="card-body">
+                        <h3 class="card-title">AeroPress</h3>
+                        <p class="card-text">Compact and portable coffee press for quick and easy coffee on the go.</p>
+                        <p class="text-muted">Price: $30.00</p>
+
+                        <!-- Quantity Selector -->
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('aeropressQty', -1)">-</button>
+                            <input type="text" id="aeropressQty" value="1" class="text-center mx-2" style="width: 50px;" readonly>
+                            <button class="btn btn-outline-secondary" onclick="changeQuantity('aeropressQty', 1)">+</button>
+                        </div>
+
+                        <button class="btn btn-dark" onclick="addToCart('AeroPress', 30.00, parseInt(document.getElementById('aeropressQty').value))">Add to Cart</button>
+                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#aeroPressModal">Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modals -->
+        <!-- French Press Modal -->
+        <div class="modal fade" id="frenchPressModal" tabindex="-1" aria-labelledby="frenchPressModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-light">
+                        <h5 class="modal-title" id="frenchPressModalLabel">French Press</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Description:</h6>
+                        <p>The French press, or press pot, is a simple and effective way to brew coffee, allowing for full immersion of coffee grounds in water. This method produces a rich and robust flavor, making it a favorite among coffee enthusiasts.</p>
+                        <h6>Usage Tips:</h6>
+                        <ul>
+                            <li><strong>Coarse Grind:</strong> Use a coarse grind to prevent sediment in the final cup.</li>
+                            <li><strong>Water Ratio:</strong> A common ratio is 1:15 (1 part coffee to 15 parts water) for a balanced brew.</li>
+                            <li><strong>Steeping Time:</strong> Allow the coffee to steep for about 4 minutes before pressing down the plunger.</li>
+                            <li><strong>Serve Immediately:</strong> French press coffee is best enjoyed fresh; it can become bitter if left to sit.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Espresso Machine Modal -->
+        <div class="modal fade" id="espressoMachineModal" tabindex="-1" aria-labelledby="espressoMachineModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-light">
+                        <h5 class="modal-title" id="espressoMachineModalLabel">Espresso Machine</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Description:</h6>
+                        <p>Espresso machines are designed to brew coffee by forcing hot water through finely-ground coffee. They are essential for crafting rich and bold espresso shots, the foundation for various coffee drinks like lattes and cappuccinos.</p>
+                        <h6>Usage Tips:</h6>
+                        <ul>
+                            <li><strong>Grind Size:</strong> Use a fine grind for espresso to achieve optimal extraction.</li>
+                            <li><strong>Tamping:</strong> Evenly tamp the coffee grounds in the portafilter to create a uniform surface for water flow.</li>
+                            <li><strong>Water Temperature:</strong> Brew at around 190-205°F (88-96°C) for the best flavor extraction.</li>
+                            <li><strong>Maintenance:</strong> Regularly clean the machine to prevent oil buildup, and descale it periodically to maintain performance.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Pour Over Modal -->
+        <div class="modal fade" id="pourOverModal" tabindex="-1" aria-labelledby="pourOverModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-light">
+                        <h5 class="modal-title" id="pourOverModalLabel">Pour Over</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Description:</h6>
+                        <p>Pour-over coffee makers, like the Hario V60 or Chemex, allow for precise control over brewing variables, resulting in a clean and flavorful cup of coffee. The method involves pouring hot water over coffee grounds in a filter.</p>
+                        <h6>Usage Tips:</h6>
+                        <ul>
+                            <li><strong>Grind Size:</strong> Use a medium grind for optimal flow rate.</li>
+                            <li><strong>Water Temperature:</strong> Aim for water around 200°F (93°C) to enhance extraction without burning the coffee.</li>
+                            <li><strong>Blooming:</strong> Allow the coffee to bloom for 30 seconds after the initial pour to release carbon dioxide, enhancing flavor.</li>
+                            <li><strong>Pouring Technique:</strong> Pour in a slow, circular motion to evenly saturate the grounds.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Coffee Grinder Modal -->
+        <div class="modal fade" id="coffeeGrinderModal" tabindex="-1" aria-labelledby="coffeeGrinderModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-light">
+                        <h5 class="modal-title" id="coffeeGrinderModalLabel">Coffee Grinder</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Description:</h6>
+                        <p>A coffee grinder is essential for achieving the right grind size for your brewing method. This adjustable ceramic grinder allows you to customize the coarseness or fineness of your coffee grounds, which significantly affects flavor and extraction.</p>
+                        <h6>Usage Tips:</h6>
+                        <ul>
+                            <li><strong>Freshness:</strong> Grind coffee beans just before brewing for maximum freshness.</li>
+                            <li><strong>Adjust Grind Size:</strong> Experiment with different grind sizes based on your brewing method to find your perfect cup.</li>
+                            <li><strong>Clean Regularly:</strong> Clean your grinder frequently to prevent old coffee oils from affecting the flavor of your coffee.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- AeroPress Modal -->
+        <div class="modal fade" id="aeroPressModal" tabindex="-1" aria-labelledby="aeroPressModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-light">
+                        <h5 class="modal-title" id="aeroPressModalLabel">AeroPress</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Description:</h6>
+                        <p>The AeroPress is a portable coffee press that uses air pressure to extract flavor from coffee grounds. It's easy to use and perfect for travel or quick brewing at home.</p>
+                        <h6>Usage Tips:</h6>
+                        <ul>
+                            <li><strong>Coffee-to-Water Ratio:</strong> Start with a 1:15 ratio and adjust to taste.</li>
+                            <li><strong>Brewing Time:</strong> Brew for about 30 seconds to 1 minute for optimal flavor extraction.</li>
+                            <li><strong>Cleaning:</strong> Cleanup is simple; just remove the used coffee puck and rinse the AeroPress.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+
+    <footer class="bg-dark text-white text-center py-4">
+        <p>&copy; 2024 Bean Boutique | Follow us on Social Media</p>
+        <div class="d-flex justify-content-center">
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="text-white mx-2">
+                <i class="fab fa-facebook-f fa-2x"></i>
+            </a>
+            <a href="https://twitter.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-twitter fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://www.youtube.com/c/yourchannel" target="_blank" class="text-white mx-2">
+                <i class="fab fa-youtube fa-2x"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>
