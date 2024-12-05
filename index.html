@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bean Boutique</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/social-media.css">
+    <link rel="stylesheet" href="css/image.css">
+</head>
+<body class="bg-light">
+
+
+    <nav class="navbar bg-dark">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <!-- Centered Title -->
+            <p class="h1 text-light mx-auto">Bean Boutique</p>
+    
+            <!-- Shopping Cart Button (Right-aligned) -->
+            <button id="cartButton" type="button" class="btn btn-primary position-relative ms-auto me-3" data-bs-toggle="modal" data-bs-target="#cartModal">
+                <i class="fas fa-shopping-cart"></i> <!-- Shopping Cart Icon -->
+                Shopping Cart
+                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    0
+                    <span class="visually-hidden">items in cart</span>
+                </span>
+            </button>
+    
+            <!-- Button to toggle Offcanvas on small screens -->
+            <button class="btn btn-outline-light d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav">
+                Menu
+            </button>
+        </div>
+    </nav>
+
+    <!-- Navbar for larger screens -->
+    <ul class="nav nav-tabs bg-dark d-none d-lg-flex" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active bg-light" href="index.html" role="tab" aria-selected="true">Home</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="brewing-equipment.html" role="tab" aria-selected="false">Brewing Equipment</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="special-offers.html" role="tab" aria-selected="false">Special Offers</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link text-warning" href="contact-us.html" role="tab" aria-selected="false">Contact Us</a>
+        </li>
+    </ul>
+
+    <!-- Offcanvas for smaller screens -->
+    <div class="offcanvas offcanvas-start bg-dark text-white" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavLabel">Menu</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav nav-tabs flex-column" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active bg-light" href="index.html" role="tab" aria-selected="true">Home</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="coffee-selection.html" role="tab" aria-selected="false">Coffee Selection</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="brewing-equipment.html" role="tab" aria-selected="false">Brewing Equipment</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="events-workshops.html" role="tab" aria-selected="false">Events & Workshops</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="special-offers.html" role="tab" aria-selected="false">Special Offers</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link text-warning" href="contact-us.html" role="tab" aria-selected="false">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light" >
+                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cart-items" class="p-4 bg-light rounded">
+                        <!-- Items will be dynamically added here by JavaScript -->
+                    </div>
+                    <div id="cart-total" class="d-flex justify-content-between align-items-center mt-4 p-3">
+                        <p class="mb-0">Total: $<span id="total-price">0.00</span></p>
+                        <button id="checkout-btn" class="btn btn-dark">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="img/coffee1.jpg" class="d-block w-100 img-fluid" alt="Fresh Coffee Beans">
+                    <div class="carousel-caption d-block bg-dark bg-opacity-50 rounded-3 p-2">
+                        <h5>Fresh Coffee Beans: Elevate Your Brew</h5>
+                        <p class="small-text">Discover the essence of exceptional coffee with our fresh coffee beans, sourced from the world's finest regions. Roasted to perfection, each batch is packed with rich flavor and aroma. Whether you love bold dark roasts or smooth blends, our selection will transform your coffee experience. Taste the difference that fresh beans make—your perfect cup awaits!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/coffee-2.jpg" class="d-block w-100 img-fluid" alt="Brewing Equipment">
+                    <div class="carousel-caption d-block bg-dark bg-opacity-50 rounded-3 p-2">
+                        <h5>Brew Like a Pro!</h5>
+                        <p class="small-text">At Bean Boutique, elevate your coffee experience with our top-notch brewing equipment! From classic French presses to modern espresso machines, we have everything you need to brew your perfect cup. Discover quality, style, and expert tips to unlock rich flavors with every sip. Explore our collection today!</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/coffee3.webp" class="d-block w-100 img-fluid" alt="Enjoying Coffee">
+                    <div class="carousel-caption d-block bg-dark bg-opacity-50 rounded-3 p-2">
+                        <h5>Enjoying Coffee: A Moment of Bliss</h5>
+                        <p class="small-text">At Bean Boutique, every cup of coffee is a moment to savor. Experience the rich aromas and diverse flavors of our carefully curated blends, perfect for unwinding or sharing with friends. Elevate your coffee ritual with our premium brewing equipment and embrace the joy of each sip. Discover your perfect cup at Bean Boutique—where every brew tells a story!</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
+   <!-- Modal Structure -->
+    <div class="modal fade" id="discountModal" tabindex="-1" aria-labelledby="discountModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-light">
+                    <h5 class="modal-title" id="discountModalLabel" >Welcome to Bean Boutique!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Get 10% off your first purchase! Sign up with your email to receive your discount.</p>
+                    
+                    <!-- Form Starts Here -->
+                    <form id="discountForm" onsubmit="applyDiscount(event)">
+                        <div class="mb-3">
+                            <input type="email" class="form-control" id="discountEmail" placeholder="Enter your email" required>
+                            <div class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" id="discountPassword" placeholder="Create a password" required>
+                            <div class="invalid-feedback">
+                                Please create a password.
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Form Ends Here -->
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!-- Submit the form when clicking Sign Up -->
+                    <button type="submit" form="discountForm" class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <p>&copy; 2024 Bean Boutique | Follow us on Social Media</p>
+        <div class="d-flex justify-content-center">
+            <a href="https://www.facebook.com/yourpage" target="_blank" class="text-white mx-2">
+                <i class="fab fa-facebook-f fa-2x"></i>
+            </a>
+            <a href="https://twitter.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-twitter fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com/yourprofile" target="_blank" class="text-white mx-2">
+                <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://www.youtube.com/c/yourchannel" target="_blank" class="text-white mx-2">
+                <i class="fab fa-youtube fa-2x"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/signup.js"></script>
+</body>
+</html>
