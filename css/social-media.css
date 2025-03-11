@@ -1,0 +1,21 @@
+a:hover i.fa-facebook-f {
+    color: #3b5999;
+}
+a:hover i.fa-twitter {
+    color: #46c1f6;
+}
+a:hover i.fa-instagram {
+    color: #e1306c;
+}
+a:hover i.fa-youtube {
+    color: #de463b;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+/* Override bg-warning for both body and nav-link */
+.background {
+    background-color: #F3E5AB !important; /* Light cream or beige */
+}
