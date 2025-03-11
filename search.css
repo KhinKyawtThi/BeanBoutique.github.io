@@ -1,0 +1,39 @@
+/* Styling for the search form container */
+.search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Initially hide the input field */
+.search-input {
+    width: 0;
+    opacity: 0;
+    transition: width 0.4s ease, opacity 0.4s ease;
+    padding: 0;
+    border: none;
+    margin-left: 8px;
+}
+
+/* Show input when form has the "active" class */
+.search-form.active .search-input {
+    width: 300px;
+    opacity: 1;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+/* Style the search button icon */
+.search-icon {
+    background-color: transparent;
+    border: 1px solid;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Change icon color on hover */
+.search-icon:hover {
+    color: #F3E5AB;
+}
+

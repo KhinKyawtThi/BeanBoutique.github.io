@@ -1,0 +1,25 @@
+.carousel-inner img {
+    height: 700px; /* Set a fixed height */
+    object-fit: cover; /* Ensures images maintain their aspect ratio */
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.event-image {
+    height: 200px; /* Set a fixed height for the images */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    width: 80%; /* Make the image responsive */
+}
+
+#calendar {
+    background-color: #ffffff; /* Light beige or cream color */
+    border-radius: 8px;        /* Optional: adds rounded corners */
+    padding: 10px;             /* Optional: adds padding inside the calendar */
+}
+
+/* Custom CSS for responsive text size */
+@media (max-width: 768px) {
+    .carousel-caption .small-text {
+        font-size: 0.875rem; /* Smaller text size on small screens */
+    }
+}
